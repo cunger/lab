@@ -1,6 +1,6 @@
 defmodule Nuclide do
   @moduledoc """
-  A species of nuclei.
+  Specifies a species of nuclei.
 
   Example:
 
@@ -14,10 +14,14 @@ defmodule Nuclide do
         target: nitrogen_14
         energy: Energy.of(0.156, :MeV)
       }
-    ]}
+    ])
   """
 
-  defstruct [ :a, :z, decay_constant: 0, energy: 0, decay_modes: [] ]
+  defstruct [ :a, :z, energy: 0, decay_constant: 0, decay_modes: [] ]
+
+  def new(z, a) do
+    %Nuclide{a: a, z: z}
+  end
 
   def new(z, a, halflife) do
     %Nuclide{a: a, z: z,
@@ -31,16 +35,6 @@ defmodule Nuclide do
       decay_modes: decays
     }
   end
-
-  def tick(nuclide) do
-    p = nuclide.decay_constant / 100
-
-    # If Probability.happens(p), then decay
-    # (i.e. determine which decay mode based on their probabilities),
-    # otherwise stay as you are.
-  end
-
-  # Pretty printing
 
   def to_string(%Nuclide{a: a, z: z, energy: e}) when e > 0 do
     "#{z}-#{Element.symbol(z)}*-#{a}"

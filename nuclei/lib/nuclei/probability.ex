@@ -30,8 +30,40 @@ defmodule Probability do
     # from 1 to 10_000. The first p * 10_000 integers stand for `true`,
     # the others for `false`. For example, 0.4 means the urn is filled
     # with 10_000 integers, where 1...4000 count as `true`
-    # and 6000...10_000 count as `false`. `:rand.uniform` is used to draw
-    # one of those integers.
+    # and 6000...10_000 count as `false`.
+    # `:rand.uniform` is used to draw one of those integers.
     :rand.uniform(10_000) <= :math.floor(p * 10_000)
+  end
+
+  @doc """
+  Samples on of the given options based on their probabilities.
+  It pressuposes:
+  * Each option is assumed to have a method or field `probability/0`.
+  * The probabilities of all options sum up to 1.
+  """
+  def sample(options) do
+    # Modelled as randomly drawing from an urn which contains all integers
+    # from 1 to 10_000, where each option has a range determined by its
+    # probability. For example, for three options with probabilities 0.6,
+    # 0.3 and 0.1, `ranges` are [6000, 3000, 1000] and:
+    # * if the randomly drawn integer is in 0...6000, option 1 is picked
+    # * if it is in 6000...(6000 + 3000), option 2 is picked, and
+    # * if it is in (6000 + 3000)...(6000 + 3000 + 1000), option 3 is picked.
+
+    ranges = for option <- options do
+      :math.floor(option.probability * 10_000)
+    end
+
+    index = ranges
+    |> Enum.with_index
+    |> find(0, :rand.uniform(10_000))
+
+    Enum.at(options, index)
+  end
+
+  defp find([ {range, index} | _ ], offset, draw)
+    when draw <= offset + range, do: index
+  defp find([ {range, _} | remaining ], offset, draw) do
+    find(remaining, range + offset, draw)
   end
 end
