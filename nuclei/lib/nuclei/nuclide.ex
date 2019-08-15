@@ -1,13 +1,15 @@
 defmodule Nuclide do
   @moduledoc """
-  Specifies a species of nuclei.
+  A species of nuclei, comprising information about the number of protons
+  and neutrons, and optionally its energy if it is in an excited state,
+  as well as its decay constant and possible decay modes if it is not stable.
 
   Example:
 
-  Nitrogen-14 is a stable isotope:
+  Nitrogen-14 is a stable isotope.
   > Nuclide.new(7, 14)
 
-  Carbon-14 decays to Nitrogen-14 via B- decay:
+  Carbon-14 decays to Nitrogen-14 via B- decay.
   > Nuclide.new(6, 14, Halflife.of(5370, :years), [
       %Decay.BetaMinus{
         probability: Probability.of(100, :percent),

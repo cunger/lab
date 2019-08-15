@@ -1,6 +1,11 @@
 defmodule Nucleus do
   @moduledoc """
+  A specific nucleus.
 
+  Once it is spawned, it loops through its lifetime, once second at a time.
+  In each second, it is decided whether it decays or not, and if it does,
+  a decay mode is picked. Depending on that mode, a new nucleus corresponding
+  to the decay product is spawned, and the decayed nucleus process stops.
   """
 
   def spawn(nuclide, ticks) do

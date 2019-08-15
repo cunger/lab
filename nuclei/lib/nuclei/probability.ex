@@ -1,4 +1,7 @@
 defmodule Probability do
+  @moduledoc """
+  Functionality for taking random decisions based on probabilities.
+  """
 
   @doc """
   Constructs a probability in [0,1] from a given percentage.
