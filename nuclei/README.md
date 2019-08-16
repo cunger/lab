@@ -5,7 +5,8 @@ Each atom has its own BEAM process. ... ticks, where each tick corresponds to 1 
 
 **Questions:**
 
-* If the half-life is in seconds, is the decay constant indeed the probability of being decayed after delta t of one second?
+* decay constant -> probability (cf. https://physics.stackexchange.com/a/92285)
+* What is "Beta + neutron" decay in the nuclide chart?
 
 ## TODO
 

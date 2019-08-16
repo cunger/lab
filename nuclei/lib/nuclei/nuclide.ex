@@ -7,10 +7,11 @@ defmodule Nuclide do
   Example:
 
   Nitrogen-14 is a stable isotope.
-  > Nuclide.new(7, 14)
+  > nitrogen_14 = Nuclide.new(7, 14)
 
   Carbon-14 decays to Nitrogen-14 via B- decay.
-  > Nuclide.new(6, 14, Halflife.of(5370, :years), [
+  alias TimePeriod, as: Halflife
+  > carbon_14 = Nuclide.new(6, 14, Halflife.of(5370, :years), [
       %Decay.BetaMinus{
         probability: Probability.of(100, :percent),
         target: nitrogen_14
@@ -33,6 +34,13 @@ defmodule Nuclide do
 
   def new(z, a, halflife, decays) do
     %Nuclide{a: a, z: z,
+      decay_constant: DecayConstant.from(halflife),
+      decay_modes: decays
+    }
+  end
+
+  def new(z, a, e, halflife, decays) do
+    %Nuclide{a: a, z: z, energy: e,
       decay_constant: DecayConstant.from(halflife),
       decay_modes: decays
     }

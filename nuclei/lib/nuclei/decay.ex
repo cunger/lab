@@ -12,7 +12,7 @@ defmodule Decay do
   end
 
   defmodule IsomericTransition do
-    defstruct [:probability, :energy]
+    defstruct [:probability, :target, :energy]
   end
 
   defmodule ElectronCapture do

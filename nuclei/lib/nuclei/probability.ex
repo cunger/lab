@@ -20,6 +20,14 @@ defmodule Probability do
   end
 
   @doc """
+  Calculates the probability of a nucleus decaying after some time period,
+  given its decay constant.
+  """
+  def of_decay_after(seconds, decay_constant) do
+    min(1, decay_constant * seconds)
+  end
+
+  @doc """
   Determines whether the probability `p` happens or not, modelled as a simple
   random drawing from an urn, which is filled according to `p`.
   `p` has to be within [0,1] and the calculation takes into account only

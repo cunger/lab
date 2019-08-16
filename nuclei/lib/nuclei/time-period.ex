@@ -1,12 +1,12 @@
-defmodule Halflife do
+defmodule TimePeriod do
   @moduledoc """
-  Helper for normalizing the halflife of a particle to seconds.
+  Helper for normalizing time periods to seconds.
 
   Example:
 
-  > Halflife.of(2.17, :seconds)
-  > Halflife.of(1, :day)
-  > Halflife.of(5370, :years)
+  > TimePeriod.of(2.17, :seconds)
+  > TimePeriod.of(1, :day)
+  > TimePeriod.of(5370, :years)
   """
 
   def of(num, :s), do: of(num, :seconds)
