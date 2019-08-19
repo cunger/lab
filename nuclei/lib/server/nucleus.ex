@@ -22,8 +22,11 @@ defmodule Nucleus do
 
     if Probability.happens(p) do
       decay = Probability.sample(nuclide.decay_modes)
-      spawn(1, decay.target, max_ticks - current_tick, monitor)
-      Monitor.report_released_energy_to(monitor, decay.energy)
+      Monitor.report_decay_to(monitor, current_tick, nuclide, decay)
+
+      decay.targets |> Enum.each( fn (target) ->
+        spawn(1, target, max_ticks - current_tick, monitor)
+      end)
     else
       tick(nuclide, current_tick + 1, max_ticks, monitor)
     end

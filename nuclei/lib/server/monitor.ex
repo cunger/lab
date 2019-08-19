@@ -11,8 +11,8 @@ defmodule Monitor do
     GenServer.start_link(__MODULE__, :ok, [])
   end
 
-  def report_released_energy_to(pid, energy) do
-    GenServer.cast(pid, {:energy_released, energy})
+  def report_decay_to(pid, tick, source, event) do
+    GenServer.cast(pid, {:decay, tick, source, event})
   end
 
   ## Server
@@ -23,8 +23,10 @@ defmodule Monitor do
   end
 
   @impl true
-  def handle_cast({:energy_released, energy}, report) do
-    IO.puts("#{report.total_energy + energy} MeV")
-    {:noreply, %Monitor.Report{ report | total_energy: report.total_energy + energy}}
+  def handle_cast({:decay, tick, source, event}, report) do
+    IO.puts("#{tick}: #{source} #{event} (total: #{report.total_energy + event.released_energy} MeV)")
+    {:noreply, %Monitor.Report{ report |
+      total_energy: report.total_energy + event.released_energy}
+    }
   end
 end
