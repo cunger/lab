@@ -3,6 +3,8 @@ defmodule Probability do
   Functionality for taking random decisions based on probabilities.
   """
 
+  @e 2.718281828459045
+
   @doc """
   Constructs a probability in [0,1] from a given percentage.
   Takes into account two significant digits; excess digits
@@ -24,7 +26,7 @@ defmodule Probability do
   given its decay constant.
   """
   def of_decay_after(seconds, decay_constant) do
-    min(1, decay_constant * seconds)
+    1 - :math.pow(@e, - decay_constant * seconds)
   end
 
   @doc """
