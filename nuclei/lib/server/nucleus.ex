@@ -9,12 +9,12 @@ defmodule Nucleus do
   """
 
   def spawn(num, nuclide, ticks, monitor) do
-    1..num |> Enum.each(fn (_) ->
-      spawn_link(fn () -> tick(nuclide, 0, ticks, monitor) end)
+    Enum.map(1..num, fn (_) ->
+      spawn_link(fn -> tick(nuclide, 0, ticks, monitor) end)
     end)
   end
 
-  def tick(_, current_tick, max_ticks, monitor) when current_tick >= max_ticks do
+  def tick(_, current_tick, max_ticks, _) when current_tick >= max_ticks do
   end
 
   def tick(nuclide, current_tick, max_ticks, monitor) do
