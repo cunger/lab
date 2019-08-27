@@ -24,6 +24,13 @@ defmodule Probability do
   @doc """
   Calculates the probability of a nucleus decaying after some time period,
   given its decay constant.
+
+  Derived from the decay equation: N(t) = N(0)e^{-\lambda t}.
+  N(t)/N(0) is the fraction of nuclides surviving up to time t,
+  which can also be seen as the proability of a single nucleus
+  to survive until time t. Thus 1 - N(t)/N(0) is the probability
+  of that nucleus to have decayed after time t. This probability
+  is 1 - e^{-\lambda t}, since N(t)/N(0) = e^{-\lambda t}.
   """
   def of_decay_after(seconds, decay_constant) do
     1 - :math.pow(@e, - decay_constant * seconds)
