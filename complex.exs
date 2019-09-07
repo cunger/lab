@@ -1,13 +1,17 @@
 defmodule Complex do
-  
+
   defstruct real: 0, imaginary: 0
 
   def from(n) do
     %Complex{real: n, imaginary: 0}
   end
 
-  def new(x, y) do
+  def cartesian(x, y) do
     %Complex{real: x, imaginary: y}
+  end
+
+  def polar(r, theta) do
+    %Complex{real: r * :math.cos(theta), imaginary: r * :math.sin(theta)}
   end
 
   def conjugate(%Complex{real: r, imaginary: i}) do
@@ -62,8 +66,8 @@ end
 
 defmodule Example do
   def run do
-    z = Complex.new(1, 3)
-    w = Complex.new(3, -2)
+    z = Complex.cartesian(1, 3)
+    w = Complex.cartesian(3, -2)
 
     solution1 = Complex.add(Complex.conjugate(z), Complex.conjugate(w))
     solution2 = Complex.multiply(z, w)
@@ -73,13 +77,18 @@ defmodule Example do
     IO.puts solution2
     IO.puts solution3
 
-    IO.puts "|z| = #{Complex.magnitude(Complex.new(1, 3))}"
-    IO.puts "|z| = #{Complex.magnitude(Complex.new(3, -2))}"
+    IO.puts "|z| = #{Complex.magnitude(z)}"
+    IO.puts "|w| = #{Complex.magnitude(w)}"
     IO.puts "tht = #{Complex.phase(solution3)}"
 
     IO.puts Complex.from(1)
 
-    IO.puts Complex.polar_form(Complex.new(0, -8))
+    IO.puts Complex.polar_form(Complex.cartesian(0, -8))
+    IO.puts Complex.polar_form(Complex.cartesian(-2, 0))
+    IO.puts Complex.polar_form(Complex.cartesian(4, 4))
+    IO.puts Complex.polar_form(Complex.cartesian(-6, -6*:math.sqrt(3)))
+
+    IO.puts Complex.polar_form(Complex.polar(2, :math.pi))
   end
 end
 
