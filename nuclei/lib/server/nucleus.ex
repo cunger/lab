@@ -18,7 +18,8 @@ defmodule Nucleus do
   end
 
   def tick(nuclide, current_tick, max_ticks, monitor) do
-    p = Probability.of_decay_after(TimePeriod.of(current_tick, :seconds), nuclide.decay_constant)
+    t = TimePeriod.of(current_tick, :seconds)
+    p = Probability.of_decay_after(t, nuclide.decay_constant)
 
     if Probability.happens(p) do
       decay = Probability.sample(nuclide.decay_modes)
