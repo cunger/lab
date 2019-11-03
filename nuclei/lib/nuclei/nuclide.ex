@@ -1,12 +1,14 @@
 defmodule Nuclide do
   @moduledoc """
   A species of nuclei, comprising information about the number of protons
-  and neutrons, and optionally its energy if it is in an excited state,
-  as well as its decay constant and possible decay modes if it is not stable.
+  and neutrons (where :a is the number of protons and :z is the mass number,
+  the sum of protons and neutrons), optionally its energy if it is in an
+  excited state, as well as its decay constant and possible decay modes
+  if it is not stable.
 
   Example:
 
-  Nitrogen-14 is a stable isotope.
+  Nitrogen-14 is a stable isotope with 7 protons and 7 neutrons.
 
       nitrogen_14 = Nuclide.new(7, 14)
 
