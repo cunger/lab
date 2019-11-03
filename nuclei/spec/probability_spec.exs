@@ -1,11 +1,13 @@
 defmodule ProbabilitySpec do
   use ESpec
 
-  describe "Halflife" do
+  alias TimePeriod, as: Halflife
+
+  describe "TimePeriod" do
     it do
-      Halflife.of(2, :hours) |> should(be 7200)
-      Halflife.of(1, :day) |> should(be 86_400)
-      Halflife.of(12.3, :years) |> should(be 387_892_800)
+      TimePeriod.of(2, :hours) |> should(be 7200)
+      TimePeriod.of(1, :day) |> should(be 86_400)
+      TimePeriod.of(12.3, :years) |> should(be 387_892_800)
     end
   end
 
