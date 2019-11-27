@@ -42,7 +42,7 @@ PROGRAM problem1
     INTEGER :: n ! number of elements in the sequence of multiples,
                  ! as well as the last element in that sequence
 
-    n = FLOOR((limit - 1) / i * 1.0)
+    n = (limit - 1) / i
     sum = i * arithmetic_sum(n, 1, n)
 
     RETURN
