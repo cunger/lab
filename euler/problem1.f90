@@ -7,23 +7,23 @@
 ! Find the sum of all the multiples of 3 or 5 below 1000.
 ! ----------------------------------------------------------------------------
 
-PROGRAM problem1
-  USE arithmetic
-  IMPLICIT NONE
+program problem1
+  use arithmetic
+  implicit none
 
-  INTEGER :: limit = 1000
-  INTEGER :: sum = 0
+  integer :: limit = 1000
+  integer :: sum = 0
 
   sum = sum_of_multiples_of(3, limit) &
       + sum_of_multiples_of(5, limit) &
       - sum_of_multiples_of(15, limit)
 
-  WRITE (*,*) sum
+  write (*,*) sum
 
-  CONTAINS
+  contains
 
-  INTEGER FUNCTION sum_of_multiples_of (i, limit) RESULT(sum)
-    IMPLICIT NONE
+  real(dp) function sum_of_multiples_of (i, limit) result(sum)
+    implicit none
 
     ! Calculates the sum of all multiples of i from 1 to limit - 1,
     ! using the sum formula of arithmetic series.
@@ -36,15 +36,17 @@ PROGRAM problem1
     !
     ! Complexity: O(1)
 
-    INTEGER, INTENT(IN) :: i
-    INTEGER, INTENT(IN) :: limit
+    integer, intent(in) :: i
+    integer, intent(in) :: limit
 
-    INTEGER :: n ! number of elements in the sequence of multiples,
+    integer :: n ! number of elements in the sequence of multiples,
                  ! as well as the last element in that sequence
 
-    n = (limit - 1) / i
+    n = (limit - 1) / i ! integer division is exactly right here,
+                        ! because we want floor anyway
+
     sum = i * arithmetic_sum(n, 1, n)
 
-    RETURN
-  END FUNCTION sum_of_multiples_of
-END PROGRAM problem1
+    return
+  end function sum_of_multiples_of
+end program problem1
