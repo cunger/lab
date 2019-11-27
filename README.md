@@ -1,13 +1,16 @@
 
-Computer simulation and modeling playground.
+Playground for computer simulation, modeling, and numerical problem solving.
 
 ## Table of contents
 
-* [Nuclei](https://github.com/cunger/simulacron/tree/master/nuclei): Markov Chain Monte Carlo simulation of radioactive decay
+* [nuclei](https://github.com/cunger/simulacron/tree/master/nuclei): Markov Chain simulation of radioactive decay
+
+* [euler](https://github.com/cunger/simulacron/tree/master/euler): Solving [Project Euler](https://projecteuler.net/) problems in Fortran
 
 * Free fall: [analytical](https://github.com/cunger/simulacron/blob/master/freefall_analytical.exs) and [numerical](https://github.com/cunger/simulacron/blob/master/freefall_numerical.exs) solution (simple approximation using Euler's method)
-* [Complex numbers](https://github.com/cunger/simulacron/blob/master/complex.exs)
+
+* Implementation of [complex numbers](https://github.com/cunger/simulacron/blob/master/complex.exs) in Elixir
 
 ## Reading
 
-Some of the code accompanies [christina-unger.writeas.com](https://christina-unger.writeas.com).
+Some of the code accompanies the notes at [cunger.github.io](https://cunger.github.io/).
