@@ -5,3 +5,6 @@ clean:
 
 1: arithmetic.f90 problem1.f90
 	$(FC) $^
+
+2: problem2.f90
+	$(FC) $^

@@ -22,7 +22,7 @@ program problem1
 
   contains
 
-  real(dp) function sum_of_multiples_of (i, limit) result(sum)
+  real(dp) function sum_of_multiples_of(i, limit) result(sum)
     implicit none
 
     ! Calculates the sum of all multiples of i from 1 to limit - 1,
