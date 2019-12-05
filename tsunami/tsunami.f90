@@ -49,7 +49,7 @@ program tsunami
   if (dx <= 0) stop 'grid spacing dx must be > 0'
   if (v  <= 0) stop 'background flow speed v must be > 0'
 
-  call init_gaussian(h)
+  call init_gaussian(h, 25, 0.02)
 
   print *, 0, h
 

@@ -4,14 +4,13 @@ module mod_initialization
   private
   public :: init_gaussian
 
-  integer, parameter :: xcenter = 25 ! position of peak
-  real, parameter :: xdecay = 0.02   ! controls its width
-
 contains
 
-  subroutine init_gaussian(h)
-    real, intent(in out) :: h(:)
-    integer :: x
+  subroutine init_gaussian(h, xcenter, xdecay)
+    real, intent(in out) :: h(:)   ! array of x-positions
+    integer, intent(in) :: xcenter ! position of peak
+    real, intent(in) :: xdecay     ! controls its width
+    integer :: x                   ! current position
 
     do concurrent (x = 1:size(h))
       h(x) = exp(-xdecay * (x - xcenter)**2)
