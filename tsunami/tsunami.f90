@@ -1,4 +1,8 @@
 program tsunami
+  use iso_fortran_env, only: compiler_version, compiler_options
+  use mod_initialization, only: init_gaussian
+  use mod_finite_difference, only: finite_difference
+
   implicit none
 
   ! Discrete approximation of the advection equation with finite differences:
@@ -34,9 +38,9 @@ program tsunami
   real, dimension(grid_size) :: h  ! water height (for each point in the grid)
   real, dimension(grid_size) :: dh ! finite difference of water height
 
-  ! For initiating the water height perturbation as a Gaussian shape.
-  integer, parameter :: xcenter = 25 ! its position
-  real, parameter :: xdecay = 0.02   ! controls its width
+  ! Compiler info
+
+  print *, 'Compiled with: ', compiler_version(), ' ', compiler_options()
 
   ! Check of input parameters.
 
@@ -45,42 +49,13 @@ program tsunami
   if (dx <= 0) stop 'grid spacing dx must be > 0'
   if (v  <= 0) stop 'background flow speed v must be > 0'
 
-  call init_gaussian(h, xcenter, xdecay)
+  call init_gaussian(h)
 
   print *, 0, h
 
   do t = 1, time_steps
     h = h - v * finite_difference(h) / dx * dt
 
-    print *, t, h
+    ! print *, t, h
   end do
-
-contains
-
-  pure function finite_difference(h) result(dh)
-    ! For all elements: dh(x) = h(x) - h(x-1)
-    ! Except for the first one, our boundary condition on the left:
-    ! The grid is assumed to be connected, i.e. When the blob leaves
-    ! the grid at the right side, it enters again at the left side.
-
-    real, intent(in) :: h(:)
-    real :: dh(size(h))
-
-    integer :: l
-    l = size(h)
-
-    dh(1) = h(1) - h(l)
-    dh(2:l) = h(2:l) - h(1:l-1)
-  end function finite_difference
-
-  subroutine init_gaussian(h, xcenter, xdecay)
-    real, intent(in out) :: h(:)
-    integer, intent(in) :: xcenter
-    real, intent(in) :: xdecay
-    integer :: x
-
-    do concurrent (x = 1:size(h))
-      h(x) = exp(-xdecay * (x - xcenter)**2)
-    end do
-  end subroutine init_gaussian
 end program tsunami
