@@ -7,21 +7,35 @@ module mod_finite_difference
 contains
 
   pure function finite_difference(h) result(dh)
-    ! Determines at what rate the values in an array change
-    ! from one element to the next.
-    !
-    ! For all elements: dh(x) = h(x) - h(x-1)
-    ! Except for the first one, our boundary condition on the left:
-    ! The grid is assumed to be connected, i.e. When the blob leaves
-    ! the grid at the right side, it enters again at the left side.
+    ! Determines at what rate the values in an array change,
+    ! based on centered finite difference, i.e. the difference
+    ! between the next and the previous element, divided by 2.
+    ! Thus, for all elements: dh(x) = 0.5 * (h(x+1) - h(x-1))
+    ! Special care needs to be taken of the first element,
+    ! as the boundaries of the array are assumed to be connected.
 
     real, intent(in) :: h(:)
     real :: dh(size(h))
 
-    integer :: l
-    l = size(h)
+    integer :: length, i
+    length = size(h)
 
-    dh(1) = h(1) - h(l)
-    dh(2:l) = h(2:l) - h(1:l-1)
+    do i = 1, length
+      dh(i) = 0.5 * (h(next(i, length)) - h(prev(i, length)))
+    end do
   end function finite_difference
+
+  integer pure function prev(index, length)
+    integer, intent(in) :: index
+    integer, intent(in) :: length
+
+    prev = merge(length, index - 1, index == 1)
+  end function prev
+
+  integer pure function next(index, length)
+    integer, intent(in) :: index
+    integer, intent(in) :: length
+
+    next = merge(1, index + 1, index == length)
+  end function next
 end module mod_finite_difference
