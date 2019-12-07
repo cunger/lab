@@ -12,3 +12,4 @@ $ ./tsunami
 ## TODO
 
 * make `integer` and `real` kinds explicit and document which data ranges the grid etc. can take
+* tests 
