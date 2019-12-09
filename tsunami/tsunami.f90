@@ -21,7 +21,7 @@ program tsunami
   real, dimension(grid_size) :: dh ! finite difference of water height
 
   integer, parameter :: output = 1 ! I/O unit to which the output file is attached
-  character(len=7), parameter :: file_name = 'data.js'
+  character(len=23), parameter :: file_name = 'visualization/data2d.js'
 
   ! Compiler info
 
