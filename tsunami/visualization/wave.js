@@ -3,8 +3,6 @@ var height = 400;
 
 var datapoint = data['1'];
 
-console.log(datapoint);
-
 var x = d3.scaleLinear()
   .domain([0, d3.max(datapoint, d => d.x)])
   .range([0, width]);

@@ -1,6 +1,6 @@
 FC = gfortran
 DEVFLAGS = -g -fcheck=all -fbacktrace
-MODULES = mod_initialization.f90 mod_finite_difference.f90
+MODULES = mod_logging.f90 mod_initialization.f90 mod_finite_difference.f90 mod_data2js.f90
 
 default: tsunami.f90
 	$(FC) $(DEVFLAGS) -c $(MODULES)

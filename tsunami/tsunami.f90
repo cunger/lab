@@ -1,31 +1,29 @@
 program tsunami
   use iso_fortran_env, only: compiler_version, compiler_options
+  use mod_logging, only: log_info, log_error
   use mod_initialization, only: init_gaussian
   use mod_finite_difference, only: finite_difference
+  use mod_data2js, only: file_name, prepare_output, finish_output, write_data
 
   implicit none
 
   integer, parameter :: grid_size = 100
   integer, parameter :: time_steps = 5000
 
+  integer :: t
+
   real, parameter :: dt = 0.02  ! time step [s]
   real, parameter :: dx = 1.    ! grid spacing [m]
   real, parameter :: g  = 9.81  ! gravitational acceleration [m/s²]
   real, parameter :: hmean = 10
 
-  real :: x
-  integer :: t
-
   real, dimension(grid_size) :: v  ! water velocity (for each point in the grid)
   real, dimension(grid_size) :: h  ! water height (for each point in the grid)
   real, dimension(grid_size) :: dh ! finite difference of water height
 
-  integer, parameter :: output = 1 ! I/O unit to which the output file is attached
-  character(len=23), parameter :: file_name = 'visualization/data2d.js'
-
   ! Compiler info
 
-  print *, 'Compiled with: ', compiler_version(), ' ', compiler_options()
+  call log_info('Compiled with: ' // compiler_version() // ' ' // compiler_options())
 
   ! Check of input parameters.
 
@@ -46,31 +44,6 @@ program tsunami
   end do
 
   call finish_output
-  print *, 'Data written to: ' // file_name
-contains
 
-  subroutine prepare_output
-    open(unit = output, file = file_name, status = 'replace', action = 'write')
-    write(output, *) 'var data = {'
-  end subroutine prepare_output
-
-  subroutine finish_output
-    write(output, *) '};'
-  end subroutine finish_output
-
-  subroutine write_data(t, h)
-    integer, intent(in) :: t
-    real, intent(in) :: h(:)
-    integer :: i
-
-    100 format ('  ', I4, ': [')
-    200 format ('        { x: ', I3, ', h: ', ES11.4, ' },')
-    300 format ('  ],')
-
-    write (output, 100) t
-    do i = 1, size(h)
-      write (output, 200) i, h(i)
-    end do
-    write (output, 300)
-  end subroutine write_data
+  call log_info('Data written to: ' // file_name)
 end program tsunami
