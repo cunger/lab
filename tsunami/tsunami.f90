@@ -3,7 +3,7 @@ program tsunami
   use mod_logging, only: log_info, log_error
   use mod_initialization, only: init_gaussian
   use mod_finite_difference, only: finite_difference
-  use mod_data2js, only: file_name, prepare_output, finish_output, write_data
+  use mod_data2js, only: file_name, prepare_output, write_data
 
   implicit none
 
@@ -42,8 +42,6 @@ program tsunami
     h = h - finite_difference(v * (hmean + h)) / dx * dt
     call write_data(t, h)
   end do
-
-  call finish_output
 
   call log_info('Data written to: ' // file_name)
 end program tsunami
