@@ -1,12 +1,6 @@
 
 _Markov chain simulation of nuclear decay._
 
-## Background
-
-* [Atoms](https://write.as/christina-unger/atoms)
-* [Decay modes](https://write.as/christina-unger/alpha-beta-and-gamma-decay)
-* [Decay probability](https://write.as/christina-unger/radioactive-decay)
-
 ## How it works
 
 `Nuclide` models species of nuclei, comprising information about the number of protons
