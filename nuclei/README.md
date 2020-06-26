@@ -1,5 +1,5 @@
 
-_Markov chain Monte Carlo simulation of nuclear decay._
+_Markov chain simulation of nuclear decay._
 
 ## Background
 
