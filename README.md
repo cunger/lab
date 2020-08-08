@@ -1,5 +1,5 @@
 
-Playground for computer simulation, modeling, and numerical problem solving.
+Playground for computer simulation and modeling.
 
 ## Table of contents
 
