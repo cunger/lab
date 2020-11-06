@@ -1,0 +1,15 @@
+# Game of Life
+
+### Set up
+
+In the Julia REPL, type `]` to enter the package manager.  
+```
+(v1.3) pkg> dev .
+(v1.3) pkg> status
+```
+
+### Run tests
+
+```
+$ julia test/runtests.jl
+```
