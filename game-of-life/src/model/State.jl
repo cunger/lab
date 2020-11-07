@@ -1,6 +1,6 @@
 module State
 
-export empty_board, populate, next_generation
+export Board, empty_board, populate, next_generation
 
 struct Board
   width :: Int64

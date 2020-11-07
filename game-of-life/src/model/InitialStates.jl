@@ -1,6 +1,5 @@
-module InitialStates
-
-export rip_jon_conway
+include("State.jl")
+using .State: Board, empty_board, populate
 
 function rip_jon_conway() :: Board
   board = empty_board(11, 11)
@@ -19,6 +18,4 @@ function rip_jon_conway() :: Board
   ])
 
   return board
-end
-
 end
