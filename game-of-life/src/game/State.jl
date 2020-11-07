@@ -8,6 +8,10 @@ struct Board
   cells :: Matrix{Bool}
 end
 
+function is_alive(coord::Tuple{Int64, Int64}, board::Board)
+  board.cells[coord[1], coord[2]]
+end
+
 function empty_board(width::Int64, height::Int64) :: Board
   Board(width, height, fill(false, width, height))
 end
@@ -19,6 +23,27 @@ function populate(board::Board, coordinates::Array{Tuple{Int64, Int64}})
 end
 
 function next_generation(board::Board) :: Board
+  next_board = empty_board(board.width, board.height)
+
+  for coord in CartesianIndices(board.cells)
+    x = coord[1]
+    y = coord[2]
+    alive = board.cells[x, y]
+    x_range = max(1, (x-1)):min(board.width, (x+1))
+    y_range = max(1, (y-1)):min(board.height, (y+1))
+    neighbors = view(board.cells, x_range, y_range)
+    number_of_neighbors = alive ? count(neighbors) - 1 : count(neighbors)
+
+    if alive && number_of_neighbors == 2
+      next_board.cells[x, y] = true
+    elseif number_of_neighbors == 3
+      next_board.cells[x, y] = true
+    else
+      next_board.cells[x, y] = false
+    end
+  end
+
+  next_board
 end
 
 end
