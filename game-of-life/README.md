@@ -23,5 +23,5 @@ GameOfLife> test
 ### Run game
 
 ```
-julia> using GameOfLife
+$ julia src/GameOfLife.jl
 ```

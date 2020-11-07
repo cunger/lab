@@ -1,6 +1,5 @@
 module GameOfLife
 
-include("Game.jl")
 include("model/State.jl")
 include("model/InitialStates.jl")
 include("view/View.jl")
@@ -8,7 +7,7 @@ include("view/Console.jl")
 
 function run(board, view, steps, delay)
   for i in 1:steps
-    view.clear
+    view.clear()
     view.render(board)
 
     board = State.next_generation(board)
