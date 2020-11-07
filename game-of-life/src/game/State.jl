@@ -28,15 +28,18 @@ function next_generation(board::Board) :: Board
   for coord in CartesianIndices(board.cells)
     x = coord[1]
     y = coord[2]
+
     alive = board.cells[x, y]
-    x_range = max(1, (x-1)):min(board.width, (x+1))
-    y_range = max(1, (y-1)):min(board.height, (y+1))
-    neighbors = view(board.cells, x_range, y_range)
+
+    neighbors = view(
+      board.cells,
+      max(1, (x-1)):min(board.width, (x+1)), # x range
+      max(1, (y-1)):min(board.height, (y+1)) # y range
+    )
+
     number_of_neighbors = alive ? count(neighbors) - 1 : count(neighbors)
 
-    if alive && number_of_neighbors == 2
-      next_board.cells[x, y] = true
-    elseif number_of_neighbors == 3
+    if (alive && number_of_neighbors == 2) || (number_of_neighbors == 3)
       next_board.cells[x, y] = true
     else
       next_board.cells[x, y] = false
