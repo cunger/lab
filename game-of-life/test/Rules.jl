@@ -1,20 +1,16 @@
 using Test
-using GameOfLife
-
-function is_empty(board::Board)
-  # board.cells
-end
+import GameOfLife.State: empty_board, populate
 
 @testset "populated cell with no neighbor dies of solitude" begin
   board = empty_board(4, 4)
-  populate(empty_board, [(2,2)])
-  print(board)
+  populate(board, [(2,2)])
+  println(board)
   # @test is_empty(board)
 end
 
 @testset "populated cell with one neighbor dies of solitude" begin
   board = empty_board(4, 4)
-  populate(empty_board, [(2,2), (3,3)])
+  populate(board, [(2,2), (3,3)])
   print(board)
   # @test is_empty(board)
 end

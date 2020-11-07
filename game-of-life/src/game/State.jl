@@ -9,7 +9,7 @@ struct Board
 end
 
 function empty_board(width::Int64, height::Int64) :: Board
-  Board(width, height, Matrix{Bool}(false, width, height))
+  Board(width, height, fill(false, width, height))
 end
 
 function populate(board::Board, cells::Array{Tuple{Int64, Int64}})
