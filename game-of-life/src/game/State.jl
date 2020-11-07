@@ -12,7 +12,10 @@ function empty_board(width::Int64, height::Int64) :: Board
   Board(width, height, fill(false, width, height))
 end
 
-function populate(board::Board, cells::Array{Tuple{Int64, Int64}})
+function populate(board::Board, coordinates::Array{Tuple{Int64, Int64}})
+  for coord in coordinates
+    board.cells[coord[1], coord[2]] = true
+  end
 end
 
 function next_generation(board::Board) :: Board
