@@ -1,10 +1,9 @@
 module InitialStates
 
+export rip_jon_conway
+
 function rip_jon_conway() :: Board
-  width = 11
-  height = 11
-  cells = Matrix{Bool}(false, width, height)
-  board = Board(width, height, cells)
+  board = empty_board(11, 11)
 
   populate(board, [
     (2,5), (2,6), (2,7),

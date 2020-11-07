@@ -13,3 +13,15 @@ In the Julia REPL, type `]` to enter the package manager.
 ```
 $ julia test/runtests.jl
 ```
+
+Or:
+```
+(v1.3) pkg> activate .
+GameOfLife> test
+```
+
+### Run game
+
+```
+julia> using GameOfLife
+```
