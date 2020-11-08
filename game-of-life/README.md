@@ -1,5 +1,7 @@
 # Game of Life
 
+![RIP Jon Conway](screenshot.png)
+
 ### Run game
 
 ```
