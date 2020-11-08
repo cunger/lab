@@ -11,9 +11,9 @@ function clear()
 end
 
 function render(board)
-  for row in eachrow(board.cells)
-    for cell in row
-      print(cell ? "o" : "-")
+  for col in eachcol(board.cells)
+    for cell in col
+      print(cell ? "▪" : "-")
     end
     print("\n")
   end

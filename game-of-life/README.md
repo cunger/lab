@@ -4,6 +4,8 @@
 
 ```
 julia> using GameOfLife
+[ Info: Precompiling GameOfLife [4d24e96b-6611-496d-b3f5-dc94928b86e6]
+
 julia> GameOfLife.start()
 ```
 

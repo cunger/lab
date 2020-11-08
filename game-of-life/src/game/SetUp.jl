@@ -36,5 +36,5 @@ function create_board_with(figure::Figure, width::Int64, height::Int64) :: Board
 end
 
 function add_padding(coordinates::Array{Tuple{Int64, Int64}}, x::Int64, y::Int64)
-  map(coord -> (coord[1] + y, coord[2] + x), coordinates)
+  map(coord -> (coord[1] + x, coord[2] + y), coordinates)
 end
