@@ -1,11 +1,11 @@
 using Test
 
-import GameOfLife.State: empty_board, populate, next_generation, is_alive
+import GameOfLife: empty_board, populate, next_generation, is_alive
 
 # - - - -    - - - -
-# - + - - => - - - -
+# - o - - => - - - -
 # - - - -    - - - -
-# - - - +    - - - -
+# - - - o    - - - -
 @time @testset "populated cell with no neighbor dies of solitude" begin
   board = empty_board(4, 4)
   populate(board, [(2,2), (4,4)])
@@ -17,8 +17,8 @@ import GameOfLife.State: empty_board, populate, next_generation, is_alive
 end
 
 # - - - -    - - - -
-# - + - - => - - - -
-# - - + -    - - - -
+# - o - - => - - - -
+# - - o -    - - - -
 # - - - -    - - - -
 @time @testset "populated cell with one neighbor dies of solitude" begin
   board = empty_board(4, 4)
@@ -30,9 +30,9 @@ end
   @test !is_alive((3,3), next_board)
 end
 
-# + - - -    - - - -
-# - + - - => - + - -
-# - - + -    - - - -
+# o - - -    - - - -
+# - o - - => - o - -
+# - - o -    - - - -
 # - - - -    - - - -
 @time @testset "populated cell with two neighbors survives" begin
   board = empty_board(4, 4)
@@ -45,9 +45,9 @@ end
   @test !is_alive((3,3), next_board)
 end
 
-# + + - -    + + - -
-# - + - - => - + - -
-# - - + -    - - - -
+# o o - -    o o - -
+# - o - - => - o - -
+# - - o -    - - - -
 # - - - -    - - - -
 @time @testset "populated cell with three neighbors survives" begin
   board = empty_board(4, 4)
@@ -62,9 +62,9 @@ end
   @test !is_alive((3,3), next_board)
 end
 
-# + + - -    + + - -
-# - + - - => - - - -
-# + - + -    - - - -
+# o o - -    o o - -
+# - o - - => - - - -
+# o - o -    - - - -
 # - - - -    - - - -
 @time @testset "populated cell with four neighbors dies of overpopulation" begin
   board = empty_board(4, 4)
@@ -79,9 +79,9 @@ end
   @test !is_alive((3,3), next_board)
 end
 
-# + + + -    + + + -
-# - + - - => - - - -
-# + - + -    - - - -
+# o o o -    o o o -
+# - o - - => - - - -
+# o - o -    - - - -
 # - - - -    - - - -
 @time @testset "populated cell with more than four neighbors dies of overpopulation" begin
   board = empty_board(4, 4)
@@ -97,9 +97,9 @@ end
   @test !is_alive((3,3), next_board)
 end
 
-# + + - -    - - - -
-# - - - - => - + - -
-# - - + -    - - - -
+# o o - -    - - - -
+# - - - - => - o - -
+# - - o -    - - - -
 # - - - -    - - - -
 @time @testset "empty cell with three neighbors becomes populated" begin
   board = empty_board(4, 4)

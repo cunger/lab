@@ -1,21 +1,15 @@
 module GameOfLife
 
-include("model/State.jl")
-include("model/InitialStates.jl")
-include("view/View.jl")
-include("view/Console.jl")
+include("game/types.jl")
+include("game/SetUp.jl")
+include("game/Console.jl")
+include("game/Game.jl")
 
-function run(board, view, steps, delay)
-  for i in 1:steps
-    view.clear()
-    view.render(board)
+function start()
+  include("src/config/configuration.jl")
 
-    board = State.next_generation(board)
-
-    sleep(delay)
-  end
+  board = create_board_with(figure, width, height)
+  play(board, console(), steps, delay)
 end
-
-run(rip_jon_conway(), Console.new(), 13, 0.5)
 
 end

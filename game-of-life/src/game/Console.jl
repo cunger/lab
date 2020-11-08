@@ -1,10 +1,8 @@
-module Console
 
-include("View.jl")
-
-export new
-
-function new() :: View
+"""
+A view that renders boards to the terminal.
+"""
+function console() :: View
   View(clear, render)
 end
 
@@ -20,6 +18,4 @@ function render(board)
     print("\n")
   end
   print("\n")
-end
-
 end

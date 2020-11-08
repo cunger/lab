@@ -1,27 +1,17 @@
 # Game of Life
 
-### Set up
+### Run game
 
-In the Julia REPL, type `]` to enter the package manager.  
 ```
-(v1.3) pkg> dev .
-(v1.3) pkg> status
+julia> using GameOfLife
+julia> GameOfLife.start()
 ```
+
+The configuration (board dimensions, figure, steps and delay between renders) is specified in `src/config/configuration.jl`.
 
 ### Run tests
 
 ```
-$ julia test/runtests.jl
-```
-
-Or:
-```
 (v1.3) pkg> activate .
 GameOfLife> test
-```
-
-### Run game
-
-```
-$ julia src/GameOfLife.jl
 ```
